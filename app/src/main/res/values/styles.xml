@@ -8,4 +8,11 @@
         <item name="colorAccent">@color/primaryLightColor</item>
     </style>
 
+    <style name="cardTextStyle">
+        <item name="android:textSize">20sp</item>
+        <item name="android:paddingTop">8dp</item>
+        <item name="android:textColor">@color/secondaryDarkColor</item>
+
+    </style>
+
 </resources>
