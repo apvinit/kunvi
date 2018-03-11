@@ -1,9 +1,15 @@
 package xyz.redbooks.kunvi;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
+@Entity
 public class Contact {
+    @PrimaryKey
     private int id;
+
     private String name;
+
     private int mobileNumber;
 
     public int getId() {
