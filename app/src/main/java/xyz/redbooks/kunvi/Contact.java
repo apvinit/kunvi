@@ -5,12 +5,12 @@ import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Contact {
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     private int id;
 
     private String name;
 
-    private int mobileNumber;
+    private String mobileNumber;
 
     public int getId() {
         return id;
@@ -28,11 +28,11 @@ public class Contact {
         this.name = name;
     }
 
-    public int getMobileNumber() {
+    public String getMobileNumber() {
         return mobileNumber;
     }
 
-    public void setMobileNumber(int mobileNumber) {
+    public void setMobileNumber(String mobileNumber) {
         this.mobileNumber = mobileNumber;
     }
 }
