@@ -32,9 +32,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        ImageView emptyView = findViewById(R.id.emptyView);
+        final ImageView emptyView = findViewById(R.id.emptyView);
 
-        RecyclerView recyclerView = findViewById(R.id.trustedContactList);
+        final RecyclerView recyclerView = findViewById(R.id.trustedContactList);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(this);
@@ -43,9 +43,6 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(llm);
 
         contacts = createList(5);
-        ContactAdapter adapter = new ContactAdapter(contacts);
-        recyclerView.setAdapter(adapter);
-
         if (contacts.isEmpty()) {
             recyclerView.setVisibility(View.GONE);
             emptyView.setVisibility(View.VISIBLE);
@@ -54,6 +51,25 @@ public class MainActivity extends AppCompatActivity {
             recyclerView.setVisibility(View.VISIBLE);
             emptyView.setVisibility(View.GONE);
         }
+
+        ContactAdapter adapter = new ContactAdapter(contacts, new ContactAdapter.CustomClickListener() {
+            @Override
+            public void onDeleteButtonClick(View v, int position) {
+                contacts.remove(position);
+                recyclerView.removeViewAt(position);
+                if (contacts.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
+                }
+                Snackbar.make(findViewById(R.id.root), "Removed Contact", Snackbar.LENGTH_SHORT).show();
+            }
+        });
+        recyclerView.setAdapter(adapter);
+
 
         FloatingActionButton fab = findViewById(R.id.addContact);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -73,6 +89,10 @@ public class MainActivity extends AppCompatActivity {
             contacts.add(contact);
         }
         return contacts;
+    }
+
+    private void checkListEmptyStatus(){
+
     }
 
 
