@@ -12,11 +12,11 @@ import xyz.redbooks.kunvi.Contact;
 @Dao
 public interface ContactDao {
 
-    @Query("SELECT name FROM Contact")
-    List<String> getAllContactsName();
+    @Query("SELECT * FROM Contact")
+    List<Contact> getAllContacts();
 
     @Query("SELECT mobileNumber FROM contact")
-    List<Integer> getAllContactsNumber();
+    List<String> getAllContactsNumber();
 
     @Query("SELECT * FROM Contact WHERE id = :id")
     Contact getContactById(int id);
