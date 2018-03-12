@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="xyz.redbooks.kunvi.HomeActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        android:fontFamily="cursive"
+        android:padding="8dp"
+        android:text="@string/safetyTip"
+        android:textAlignment="center"
+        android:textColor="@color/primaryDarkColor"
+        android:textSize="32sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tipOfTheDay"
+        android:layout_width="0dp"
+        android:layout_height="449dp"
+        android:layout_marginTop="92dp"
+        android:fontFamily="serif-monospace"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="30dp"
+        android:text="This is a safetyTip from tip of the day"
+        android:textAlignment="center"
+        android:textColor="@color/secondaryDarkColor"
+        android:textSize="40sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+</android.support.constraint.ConstraintLayout>

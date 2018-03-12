@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">Kun Vi</string>
     <string name="remove">Remove the added contact</string>
+    <string name="safetyTip">Safety Tip Of The Day</string>
 </resources>
