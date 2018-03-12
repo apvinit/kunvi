@@ -34,4 +34,7 @@ dependencies {
     // ViewModel and LiveData
     implementation 'android.arch.lifecycle:extensions:1.1.0'
     implementation 'com.android.support:recyclerview-v7:26.1.0'
+
+    //shake detector library
+    compile 'com.squareup:seismic:1.0.2'
 }
