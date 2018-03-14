@@ -14,9 +14,13 @@ import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity implements ShakeDetector.Listener{
     String[] tips = {"In a lift with stranger at night, press all the floor number",
-            "This is second quote",
-            "This is third quote",
-            "This is fourth quote"};
+            "Don't post anything private on internet",
+            "Everything posted on internet remains forever, Beware! while posting.",
+            "Carry Pepper spray while travelling!",
+    "Learn the basics of martial arts",
+    "Never answer door to unknown person",
+    "The elbow is the strongest point on your body. If you are close enough to use it, do!",
+    };
 
     TextView tipOfTheDay;
     SensorManager sensorManager;
