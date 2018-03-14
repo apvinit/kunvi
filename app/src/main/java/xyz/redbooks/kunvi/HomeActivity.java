@@ -27,7 +27,10 @@ import java.util.Calendar;
 
 public class HomeActivity extends AppCompatActivity {
 
-    FragmentManager fm;
+    FragmentManager fm;;
+    Fragment fragment;
+    FragmentTransaction fragmentTransaction;
+
     private ActionBarDrawerToggle drawerToggle;
     private DrawerLayout drawerLayout;
     private NavigationView navigationView;
@@ -43,6 +46,19 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.drawer);
 
         navigationView = findViewById(R.id.nav_view);
+
+        // add the tip of the day fragment
+        fm = getSupportFragmentManager();
+
+        fragment = fm.findFragmentById(R.id.fragment_container);
+
+        if(fragment == null) {
+            fragment = new TipOfTheDayFragment();
+            fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
+        }
+
+
+        //set click listener on nav menu items
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -59,13 +75,21 @@ public class HomeActivity extends AppCompatActivity {
                 switch (item.getItemId()){
 
                     case R.id.home:
-                        Snackbar.make(findViewById(R.id.drawer), "Message from Home", Snackbar.LENGTH_SHORT).show();
+                        fragmentTransaction = fm.beginTransaction();
+                        fragment = new TipOfTheDayFragment();
+                        fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
                         return true;
 
                     case R.id.trusted_contact_menu:
+                        fragment = new ContactsConfigFragment();
+                        fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
                         return true;
 
                     case R.id.about:
+                        fragment = new AboutFragment();
+                        fragmentTransaction = fm.beginTransaction();
+                        fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
                         return true;
 
                     default:
@@ -93,12 +117,7 @@ public class HomeActivity extends AppCompatActivity {
         drawerLayout.addDrawerListener(drawerToggle);
         drawerToggle.syncState();
 
-        // add the tip of the day fragment
-        fm = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
-        Fragment fragment = new TipOfTheDayFragment();
-        fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
 
     }
 
