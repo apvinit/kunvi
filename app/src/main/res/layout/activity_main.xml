@@ -5,7 +5,7 @@
     android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="xyz.redbooks.kunvi.MainActivity">
+    tools:context="xyz.redbooks.kunvi.ContactConfig">
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/trustedContactList"
