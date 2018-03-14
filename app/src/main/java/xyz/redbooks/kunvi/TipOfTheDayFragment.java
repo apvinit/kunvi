@@ -20,7 +20,8 @@ import static android.content.Context.SENSOR_SERVICE;
 
 public class TipOfTheDayFragment extends Fragment implements ShakeDetector.Listener {
 
-    String[] tips = {"In a lift with stranger at night, press all the floor number",
+    String[] tips = {
+            "In a lift with stranger at night, press all the floor number",
             "Don't post anything private on internet",
             "Everything posted on internet remains forever, Beware! while posting.",
             "Carry Pepper spray while travelling!",
