@@ -1,13 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home"
-        android:title="@string/home" />
+    <group android:checkableBehavior="single">
 
-    <item android:id="@+id/trusted_contact_menu"
-        android:title="@string/settings" />
+        <item android:id="@+id/home"
+            android:checked="true"
+            android:title="@string/home" />
 
-    <item android:id="@+id/about"
-        android:title="@string/about" />
+        <item android:id="@+id/trusted_contact_menu"
+            android:checked="false"
+            android:title="@string/settings" />
 
+        <item android:id="@+id/about"
+            android:checked="false"
+            android:title="@string/about" />
+
+    </group>
 </menu>
