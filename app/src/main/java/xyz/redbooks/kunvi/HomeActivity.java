@@ -1,6 +1,9 @@
 package xyz.redbooks.kunvi;
 
 import android.hardware.SensorManager;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,44 +15,20 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class HomeActivity extends AppCompatActivity implements ShakeDetector.Listener{
-    String[] tips = {"In a lift with stranger at night, press all the floor number",
-            "Don't post anything private on internet",
-            "Everything posted on internet remains forever, Beware! while posting.",
-            "Carry Pepper spray while travelling!",
-    "Learn the basics of martial arts",
-    "Never answer door to unknown person",
-    "The elbow is the strongest point on your body. If you are close enough to use it, do!",
-    };
+public class HomeActivity extends AppCompatActivity {
 
-    TextView tipOfTheDay;
-    SensorManager sensorManager;
-    ShakeDetector sd;
+    FragmentManager fm;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        tipOfTheDay = findViewById(R.id.tipOfTheDay); //find the TextView
-        tipOfTheDay.setText(tips[(int) ( Math.random() * (tips.length))]); //set TextView's text
+        fm = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fm.beginTransaction();
 
-        DateFormat df = new SimpleDateFormat("EEE d MMM yyyy");
-        String date = df.format(Calendar.getInstance().getTime());
+        Fragment fragment = new TipOfTheDayFragment();
+        fragmentTransaction.add(R.id.fragment_container, fragment).commit();
 
-        TextView dateAndTime = findViewById(R.id.dateAndTime);
-        dateAndTime.setText("-- " + date);
-
-
-        // add sensor Manager instance for using sensor
-        sensorManager = (SensorManager) getSystemService(SENSOR_SERVICE);
-        //add a shake detector in this context
-        sd = new ShakeDetector(this);
-        //start listening for shake gesture
-        sd.start(sensorManager);
-    }
-
-    @Override
-    public void hearShake() {
-        tipOfTheDay.setText(tips[(int) ( Math.random() * (tips.length))]);
     }
 }
