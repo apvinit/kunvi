@@ -2,14 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item android:id="@+id/home"
-        android:title="Home" />
+        android:title="@string/home" />
 
     <item android:id="@+id/trusted_contact_menu"
-        android:checked="false"
-        android:title="Settings" />
+        android:title="@string/settings" />
 
     <item android:id="@+id/about"
-        android:checked="false"
-        android:title="About" />
+        android:title="@string/about" />
 
 </menu>

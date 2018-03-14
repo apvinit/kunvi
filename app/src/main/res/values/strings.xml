@@ -3,4 +3,10 @@
     <string name="remove">Remove the added contact</string>
     <string name="safetyTip">Safety Tip Of The Day</string>
     <string name="shake_for_new_tip">(((Shake For New tip)))</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="settings">Settings</string>
+    <string name="about">About</string>
 </resources>
