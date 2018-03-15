@@ -20,7 +20,7 @@
         android:layout_height="match_parent"
         android:contentDescription="Empty State of Recycler View"
         android:scaleType="centerCrop"
-        android:src="@mipmap/ic_launcher">
+        android:src="@drawable/trusted_contact">
     </ImageView>
 
 
