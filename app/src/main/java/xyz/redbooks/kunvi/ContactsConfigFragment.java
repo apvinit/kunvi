@@ -31,6 +31,7 @@ public class ContactsConfigFragment extends Fragment {
     AppDatabase db;
     ContactAdapter adapter;
     RecyclerView recyclerView;
+    ImageView emptyView;
 
     public ContactsConfigFragment() {
         // Required empty public constructor
@@ -47,7 +48,7 @@ public class ContactsConfigFragment extends Fragment {
         db = AppDatabase.getAppDatabase(getActivity().getApplicationContext());
         contacts = db.contactDao().getAllContacts();
 
-        final ImageView emptyView = view.findViewById(R.id.emptyView);
+        emptyView = view.findViewById(R.id.emptyView);
 
         recyclerView = view.findViewById(R.id.trustedContactList);
         recyclerView.setHasFixedSize(true);
@@ -76,26 +77,12 @@ public class ContactsConfigFragment extends Fragment {
                 recyclerView.removeViewAt(position);
                 adapter.notifyDataSetChanged();
                 Snackbar.make(view.findViewById(R.id.root), "Removed Contact", Snackbar.LENGTH_SHORT).show();
-                if (contacts.isEmpty()) {
-                    recyclerView.setVisibility(View.GONE);
-                    emptyView.setVisibility(View.VISIBLE);
-                }
-                else {
-                    recyclerView.setVisibility(View.VISIBLE);
-                    emptyView.setVisibility(View.GONE);
-                }
+                checkEmptyState();
             }
         });
         recyclerView.setAdapter(adapter);
 
-        if (contacts.isEmpty()) {
-            recyclerView.setVisibility(View.GONE);
-            emptyView.setVisibility(View.VISIBLE);
-        }
-        else {
-            recyclerView.setVisibility(View.VISIBLE);
-            emptyView.setVisibility(View.GONE);
-        }
+        checkEmptyState();
 
         return view ;
     }
@@ -127,6 +114,18 @@ public class ContactsConfigFragment extends Fragment {
             }).start();
             contacts.add(contact);
             adapter.notifyItemInserted(contacts.size());
+            checkEmptyState();
+        }
+    }
+
+    private void checkEmptyState(){
+        if (contacts.isEmpty()) {
+            recyclerView.setVisibility(View.GONE);
+            emptyView.setVisibility(View.VISIBLE);
+        }
+        else {
+            recyclerView.setVisibility(View.VISIBLE);
+            emptyView.setVisibility(View.GONE);
         }
     }
 
