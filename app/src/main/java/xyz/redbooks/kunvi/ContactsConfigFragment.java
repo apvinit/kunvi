@@ -30,6 +30,7 @@ public class ContactsConfigFragment extends Fragment {
     List<Contact> contacts = new ArrayList<>();
     AppDatabase db;
     ContactAdapter adapter;
+    RecyclerView recyclerView;
 
     public ContactsConfigFragment() {
         // Required empty public constructor
@@ -48,7 +49,7 @@ public class ContactsConfigFragment extends Fragment {
 
         final ImageView emptyView = view.findViewById(R.id.emptyView);
 
-        final RecyclerView recyclerView = view.findViewById(R.id.trustedContactList);
+        recyclerView = view.findViewById(R.id.trustedContactList);
         recyclerView.setHasFixedSize(true);
 
         LinearLayoutManager llm = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -61,6 +62,7 @@ public class ContactsConfigFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 pickOneContact();
+                adapter.notifyDataSetChanged();
             }
         });
 
@@ -74,6 +76,14 @@ public class ContactsConfigFragment extends Fragment {
                 recyclerView.removeViewAt(position);
                 adapter.notifyDataSetChanged();
                 Snackbar.make(view.findViewById(R.id.root), "Removed Contact", Snackbar.LENGTH_SHORT).show();
+                if (contacts.isEmpty()) {
+                    recyclerView.setVisibility(View.GONE);
+                    emptyView.setVisibility(View.VISIBLE);
+                }
+                else {
+                    recyclerView.setVisibility(View.VISIBLE);
+                    emptyView.setVisibility(View.GONE);
+                }
             }
         });
         recyclerView.setAdapter(adapter);
@@ -115,9 +125,8 @@ public class ContactsConfigFragment extends Fragment {
                     db.contactDao().insertContact(contact);
                 }
             }).start();
-
-            contacts = db.contactDao().getAllContacts();
-            adapter.notifyDataSetChanged();
+            contacts.add(contact);
+            adapter.notifyItemInserted(contacts.size());
         }
     }
 
