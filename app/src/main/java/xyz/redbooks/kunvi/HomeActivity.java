@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.telephony.SmsManager;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,6 +29,11 @@ import com.squareup.seismic.ShakeDetector;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
+import xyz.redbooks.kunvi.database.AppDatabase;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -40,14 +46,11 @@ public class HomeActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-    static int count = 0;
-
+    int count = 0;
     BroadcastReceiver mybroadcast = new BroadcastReceiver() {
         //When Event is published, onReceive method is called
         @Override
         public void onReceive(Context context, Intent intent) {
-
-            Log.i("[BroadcastReceiver]", "MyReceiver");
 
             if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                 Log.i("[BroadcastReceiver]", "Screen ON");
@@ -55,14 +58,37 @@ public class HomeActivity extends AppCompatActivity {
             }
             else if (intent.getAction().equals(Intent.ACTION_SCREEN_OFF)) {
                 Log.i("[BroadcastReceiver]", "Screen OFF");
+                count++;
             }
+
+            Log.d("Count", Integer.toString(count));
 
             if(count == 2) {
-                Log.i("[BroadcastReceiver]", "Power button clicked Four times");
+                 new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // this code will be executed after 2 seconds
+                    count = 0;
+                }
+            }, 2000);
+            }
 
-                // do your stuff with 3 counts and set it to 0 again
+            if(count == 4) {
+                Log.i("[BroadcastReceiver]", "Power button clicked Four times");
+                AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
+
+                List<String> mobNumber = db.contactDao().getAllContactsNumber();
+                SmsManager smsManager = SmsManager.getDefault();
+
+                for(String number : mobNumber) {
+                    smsManager.sendTextMessage(number,null, "This is a test text", null, null);
+                    Log.d("MSG", "sent message to " + number);
+                }
                 count = 0;
             }
+
+            // do your stuff with 2 counts(four presses) and set it to 0 again
+            // after 3 seconds set it to 0
 
         }
     };
