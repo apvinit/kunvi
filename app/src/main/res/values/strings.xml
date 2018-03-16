@@ -8,6 +8,6 @@
     <string name="about">About</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="about_app">“Kun Vi”, is the app to alert your trusted contacts which could be helpful during emergencies. With just pressing the power button four times, the app sends an alert messages and calls to trusted contacts along with your GPS coordinate. You will never feel unsafe with this app.
+    <string name="about_app">“Kun Vi”, is the app to alert your trusted contacts which could be helpful during emergencies. With just pressing the power button four times, the app sends an alert messages and calls to trusted contacts along with your GPS coordinate.
 </string>
 </resources>
