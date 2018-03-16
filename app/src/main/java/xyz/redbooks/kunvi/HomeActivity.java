@@ -46,7 +46,7 @@ public class HomeActivity extends AppCompatActivity {
     private NavigationView navigationView;
     private Toolbar toolbar;
 
-    int count = 0;
+    static int count = 0;
     BroadcastReceiver mybroadcast = new BroadcastReceiver() {
         //When Event is published, onReceive method is called
         @Override
@@ -70,7 +70,7 @@ public class HomeActivity extends AppCompatActivity {
                     // this code will be executed after 2 seconds
                     count = 0;
                 }
-            }, 2000);
+            }, 3000);
             }
 
             if(count == 4) {
