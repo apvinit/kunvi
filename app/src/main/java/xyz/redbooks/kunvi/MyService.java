@@ -1,13 +1,16 @@
 package xyz.redbooks.kunvi;
 
+import android.Manifest;
 import android.app.Service;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.Vibrator;
+import android.support.v4.content.ContextCompat;
 import android.telephony.SmsManager;
 import android.util.Log;
 
@@ -87,7 +90,13 @@ public class MyService extends Service {
                     Intent call = new Intent(Intent.ACTION_CALL);
                     call.setData(Uri.parse("tel:"+ mobNumber.get(0)));
                     call.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    getApplicationContext().startActivity(call);
+
+                    if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+                        //handle it
+                    } else{
+
+                        getApplicationContext().startActivity(call);
+                    }
                     count = 0;
                 }
 
