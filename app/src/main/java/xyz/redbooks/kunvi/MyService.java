@@ -7,6 +7,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.IBinder;
 import android.os.Vibrator;
@@ -67,7 +69,7 @@ public class MyService extends Service {
                             // this code will be executed after 2 seconds
                             count = 0;
                         }
-                    }, 3000);
+                    }, 4000);
                 }
 
                 if(count == 4) {
@@ -76,13 +78,17 @@ public class MyService extends Service {
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
                     vibrator.vibrate(400);
 
+                    Location location = getLocation();
+                    String longi = Double.toString(location.getLongitude());
+                    String lati = Double.toString(location.getLatitude());
+
                     AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
 
                     List<String> mobNumber = db.contactDao().getAllContactsNumber();
                     SmsManager smsManager = SmsManager.getDefault();
 
                     for(String number : mobNumber) {
-                        smsManager.sendTextMessage(number,null, "This is a test text", null, null);
+                        smsManager.sendTextMessage(number,null, "I am at longitude: " + longi + " and latitude: " + lati + ". I need your help! Get to me Soon.", null, null);
                         Log.d("MSG", "sent message to " + number);
                     }
 
@@ -109,5 +115,43 @@ public class MyService extends Service {
                 /// Register the broadcast receiver
         registerReceiver(mybroadcast, new IntentFilter(Intent.ACTION_SCREEN_ON));
         registerReceiver(mybroadcast, new IntentFilter(Intent.ACTION_SCREEN_OFF));
+    }
+
+    public Location getLocation(){
+        boolean gps_enabled = false;
+        boolean network_enabled = false;
+
+        LocationManager lm = (LocationManager) getApplicationContext()
+                .getSystemService(Context.LOCATION_SERVICE);
+
+        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+        Location net_loc = null, gps_loc = null, finalLoc = null;
+
+        if (gps_enabled)
+            gps_loc = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+        if (network_enabled)
+            net_loc = lm.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
+
+        if (gps_loc != null && net_loc != null) {
+
+            //smaller the number more accurate result will
+            if (gps_loc.getAccuracy() > net_loc.getAccuracy())
+                finalLoc = net_loc;
+            else
+                finalLoc = gps_loc;
+
+            // I used this just to get an idea (if both avail, its upto you which you want to take as I've taken location with more accuracy)
+
+        } else {
+
+            if (gps_loc != null) {
+                finalLoc = gps_loc;
+            } else if (net_loc != null) {
+                finalLoc = net_loc;
+            }
+        }
+        return finalLoc;
     }
 }
