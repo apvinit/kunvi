@@ -5,6 +5,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.net.Uri;
 import android.os.IBinder;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -76,6 +77,12 @@ public class MyService extends Service {
                         smsManager.sendTextMessage(number,null, "This is a test text", null, null);
                         Log.d("MSG", "sent message to " + number);
                     }
+
+                    // Start a call to first contact
+                    Intent call = new Intent(Intent.ACTION_CALL);
+                    call.setData(Uri.parse("tel:"+ mobNumber.get(0)));
+                    call.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    getApplicationContext().startActivity(call);
                     count = 0;
                 }
 
