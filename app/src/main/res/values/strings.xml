@@ -4,10 +4,10 @@
     <string name="safetyTip">Safety Tip Of The Day</string>
     <string name="shake_for_new_tip">(((Shake For New tip)))</string>
     <string name="home">Home</string>
-    <string name="settings">Contacts</string>
+    <string name="settings">Trusted Contacts</string>
     <string name="about">About</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-    <string name="about_app">“Kun Vi”, is the app to alert your trusted contacts which could be helpful during emergencies. With just pressing the power button four times, the app sends an alert messages and calls to trusted contacts along with your GPS coordinate.
+    <string name="about_app">“Kun Vi”, is the app to alert your trusted contacts which could be helpful during emergencies. With just pressing the power button four times, the app sends an alert message along with your GPS coordinates to all trusted contacts and call one of the trusted contacts.
 </string>
 </resources>
