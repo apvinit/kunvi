@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.Uri;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.telephony.SmsManager;
 import android.util.Log;
 
@@ -68,6 +69,10 @@ public class MyService extends Service {
 
                 if(count == 4) {
                     Log.i("[BroadcastReceiver]", "Power button clicked Four times");
+
+                    Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+                    vibrator.vibrate(400);
+
                     AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
 
                     List<String> mobNumber = db.contactDao().getAllContactsNumber();
