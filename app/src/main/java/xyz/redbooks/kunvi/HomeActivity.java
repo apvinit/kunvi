@@ -64,7 +64,8 @@ public class HomeActivity extends AppCompatActivity {
         fragment = fm.findFragmentById(R.id.fragment_container);
 
         if(fragment == null) {
-            fragment = new TipOfTheDayFragment();
+//            fragment = new TipOfTheDayFragment();
+            fragment = new ContactsConfigFragment();
             fm.beginTransaction().add(R.id.fragment_container, fragment).commit();
         }
 
