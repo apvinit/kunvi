@@ -25,6 +25,7 @@ import xyz.redbooks.kunvi.database.AppDatabase;
 public class MyService extends Service {
 
     static int count = 0;
+    private String msg;
     private static BroadcastReceiver mybroadcast;
     public MyService() {
 
@@ -87,8 +88,11 @@ public class MyService extends Service {
                     List<String> mobNumber = db.contactDao().getAllContactsNumber();
                     SmsManager smsManager = SmsManager.getDefault();
 
+                    String gmapLink = "http://maps.google.com/maps?q=" + longi + ","+ lati;
+                    msg = "I am here at " + gmapLink + ". I need your help! Get to me Soon.";
+
                     for(String number : mobNumber) {
-                        smsManager.sendTextMessage(number,null, "I am at longitude: " + longi + " and latitude: " + lati + ". I need your help! Get to me Soon.", null, null);
+                        smsManager.sendTextMessage(number,null, msg, null, null);
                         Log.d("MSG", "sent message to " + number);
                     }
 
