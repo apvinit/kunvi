@@ -86,12 +86,6 @@ public class HomeActivity extends AppCompatActivity {
                 //Check to see which item was being clicked and perform appropriate action
                 switch (item.getItemId()){
 
-                    case R.id.home:
-                        fragmentTransaction = fm.beginTransaction();
-                        fragment = new TipOfTheDayFragment();
-                        fragmentTransaction.replace(R.id.fragment_container, fragment).commit();
-                        return true;
-
                     case R.id.trusted_contact_menu:
                         fragment = new ContactsConfigFragment();
                         fragmentTransaction = fm.beginTransaction();
