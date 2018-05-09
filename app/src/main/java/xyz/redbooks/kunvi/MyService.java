@@ -88,7 +88,7 @@ public class MyService extends Service {
                     List<String> mobNumber = db.contactDao().getAllContactsNumber();
                     SmsManager smsManager = SmsManager.getDefault();
 
-                    String gmapLink = "http://maps.google.com/maps?q=" + longi + ","+ lati;
+                    String gmapLink = "http://maps.google.com/maps?q=" + lati + ","+ longi;
                     msg = "I am here at " + gmapLink + ". I need your help! Get to me Soon.";
 
                     for(String number : mobNumber) {
