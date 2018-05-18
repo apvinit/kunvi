@@ -38,12 +38,20 @@ public class MyService extends Service {
 
     @Override
     public void onCreate(){
-        registerReceiver();
+//        registerReceiver(); /* Don't register the broadcast here */
     }
 
     @Override
     public void onDestroy(){
         unregisterReceiver(mybroadcast);
+    }
+
+    @Override
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        super.onStartCommand(intent, flags, startId);
+        registerReceiver();
+
+        return START_STICKY;
     }
 
     private void registerReceiver(){
