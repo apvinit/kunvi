@@ -60,7 +60,7 @@ public class MyService extends Service {
             @Override
             public void onReceive(Context context, Intent intent) {
 
-                if (intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
+                if (intent.getAction() != null && intent.getAction().equals(Intent.ACTION_SCREEN_ON)) {
                     Log.i("[BroadcastReceiver]", "Screen ON");
                     count++;
                 }
@@ -71,25 +71,37 @@ public class MyService extends Service {
 
                 Log.d("Count", Integer.toString(count));
 
-                if(count == 2) {
+                if(count == 1) {
                     new Timer().schedule(new TimerTask() {
                         @Override
                         public void run() {
-                            // this code will be executed after 2 seconds
+                            // Reset counter after 2.5 seconds so that it doesn't get false alarm
                             count = 0;
                         }
-                    }, 4000);
+                    }, 2500);
                 }
 
                 if(count == 4) {
                     Log.i("[BroadcastReceiver]", "Power button clicked Four times");
 
                     Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-                    vibrator.vibrate(400);
+
+                    if(vibrator != null && vibrator.hasVibrator()){
+
+                        vibrator.vibrate(400);
+
+                    }
 
                     Location location = getLocation();
-                    String longi = Double.toString(location.getLongitude());
-                    String lati = Double.toString(location.getLatitude());
+                    String longi, lati;
+                    if(location != null){
+
+                        longi = Double.toString(location.getLongitude());
+                        lati = Double.toString(location.getLatitude());
+                    } else {
+                        lati = "\'Not Available\'";
+                        longi = "\'Not Available\'";
+                    }
 
                     AppDatabase db = AppDatabase.getAppDatabase(getApplicationContext());
 
@@ -118,8 +130,6 @@ public class MyService extends Service {
                     count = 0;
                 }
 
-                // do your stuff with 2 counts(four presses) and set it to 0 again
-                // after 3 seconds set it to 0
 
             }
         };
@@ -136,8 +146,10 @@ public class MyService extends Service {
         LocationManager lm = (LocationManager) getApplicationContext()
                 .getSystemService(Context.LOCATION_SERVICE);
 
-        gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
-        network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        if(lm != null) {
+            gps_enabled = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+            network_enabled = lm.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+        }
 
         Location net_loc = null, gps_loc = null, finalLoc = null;
 
