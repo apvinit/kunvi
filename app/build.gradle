@@ -37,5 +37,5 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
 
     //shake detector library
-    compile 'com.squareup:seismic:1.0.2'
+    implementation 'com.squareup:seismic:1.0.2'
 }

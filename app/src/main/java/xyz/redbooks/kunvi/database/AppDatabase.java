@@ -6,7 +6,7 @@ import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
 
-import xyz.redbooks.kunvi.Contact;
+import xyz.redbooks.kunvi.model.Contact;
 
 @Database(entities = {Contact.class},version = 1, exportSchema = false)
 public abstract class AppDatabase extends RoomDatabase {

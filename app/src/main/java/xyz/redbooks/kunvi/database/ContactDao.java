@@ -7,7 +7,7 @@ import android.arch.persistence.room.Query;
 
 import java.util.List;
 
-import xyz.redbooks.kunvi.Contact;
+import xyz.redbooks.kunvi.model.Contact;
 
 @Dao
 public interface ContactDao {

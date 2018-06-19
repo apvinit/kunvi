@@ -1,10 +1,9 @@
-package xyz.redbooks.kunvi;
+package xyz.redbooks.kunvi.ui;
 
 
 import android.content.Intent;
 import android.database.Cursor;
 import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.design.widget.FloatingActionButton;
@@ -21,7 +20,10 @@ import android.widget.ImageView;
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.redbooks.kunvi.util.ContactAdapter;
+import xyz.redbooks.kunvi.R;
 import xyz.redbooks.kunvi.database.AppDatabase;
+import xyz.redbooks.kunvi.model.Contact;
 
 import static android.app.Activity.RESULT_OK;
 
